@@ -46,7 +46,11 @@ sips -s format png "<source>" --out assets/app_icon/app_icon.png
 
 ### 3. Конфиг
 
-Добавь `flutter_launcher_icons` в `dev_dependencies` и блок конфига. Для full-bleed квадрата (узор на весь холст, логотип по центру) — один файл и на background, и на foreground, inset `0`:
+Добавь `flutter_launcher_icons` в `dev_dependencies` и блок конфига.
+
+**Android padding обязателен.** Safe zone adaptive icon — центральные ~66%. Без inset логотип режется круглой/squircle маской OEM. Дефолт скилла: `adaptive_icon_foreground_inset: 16` (больше — только если пользователь просит сильнее отодвинуть).
+
+Full-bleed квадрат (узор на весь холст): **не** ставь одну и ту же картинку в background и foreground с inset — получится двойной логотип. Background — цвет с края мастера (или бренд-цвет), foreground — master PNG + inset:
 
 ```yaml
 dev_dependencies:
@@ -56,16 +60,16 @@ flutter_launcher_icons:
   android: true
   ios: true
   image_path: assets/app_icon/app_icon.png
-  adaptive_icon_background: assets/app_icon/app_icon.png
+  adaptive_icon_background: "#A22020"
   adaptive_icon_foreground: assets/app_icon/app_icon.png
-  adaptive_icon_foreground_inset: 0
+  adaptive_icon_foreground_inset: 16
   remove_alpha_ios: true
   min_sdk_android: 21
 ```
 
-Inset по умолчанию 16% даёт двойной логотип на adaptive. Отдельные слои fg/bg — только если пользователь дал два файла.
+Цвет background возьми с угла master PNG или из уже существующего `ic_launcher_background` / бренд-цвета проекта.
 
-Есть готовый логотип на прозрачном фоне — background цвет/паттерн, foreground логотип; inset можно оставить дефолтный.
+Логотип на прозрачном фоне — background цвет или паттерн, foreground логотип, тот же inset `16`. Отдельные fg/bg файлы — только если пользователь их дал.
 
 ### 4. Генерация
 

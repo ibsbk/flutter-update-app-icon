@@ -29,16 +29,21 @@ file assets/app_icon/app_icon.png
 
 ## Конфиг adaptive
 
+Android всегда с padding: `adaptive_icon_foreground_inset: 16` (safe zone ~66%). Без inset круглая маска обрезает стрелки/кольцо у края.
+
 ### Full-bleed квадрат (паттерн на весь холст)
 
-Один файл → `image_path`, `adaptive_icon_background`, `adaptive_icon_foreground`.  
-Обязательно `adaptive_icon_foreground_inset: 0`.
+- `image_path` / `adaptive_icon_foreground`: master PNG
+- `adaptive_icon_background`: hex с угла картинки или бренд-цвет — **не** тот же PNG при inset > 0
+- `adaptive_icon_foreground_inset: 16`
+
+Иначе при одном PNG в bg+fg и inset > 0 на маске виден двойной логотип.
 
 ### Логотип на прозрачном фоне
 
-- `adaptive_icon_background`: hex цвет или отдельный фон
+- `adaptive_icon_background`: hex или отдельный фон
 - `adaptive_icon_foreground`: логотип
-- inset можно оставить дефолт (16%), логотип в safe zone (~66% центра)
+- `adaptive_icon_foreground_inset: 16`
 
 ## Генерация
 

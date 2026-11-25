@@ -2,7 +2,7 @@
 
 Скилл Cursor для смены launcher-иконки Flutter-приложения на iOS и Android через `flutter_launcher_icons`.
 
-Агент кладёт master PNG в `assets/app_icon/`, настраивает конфиг (включая adaptive с `inset: 0` для full-bleed), генерирует размеры и подчищает сиротские ассеты, из-за которых ломается сборка или merge.
+Агент кладёт master PNG в `assets/app_icon/`, настраивает adaptive с padding (`inset: 16`, background — цвет, не тот же PNG), генерирует размеры и подчищает сиротские ассеты, из-за которых ломается сборка или merge.
 
 ## Установка
 
